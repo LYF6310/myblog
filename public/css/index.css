@@ -1,0 +1,256 @@
+body {
+	margin:0;
+	padding:0;
+	background:#fff url(../img/header_bg.png) repeat-x;
+	font-size:12px;
+	color:#333;
+}
+
+ul {
+	padding:0;
+	margin:0;
+}
+ul li {
+	list-style-type:none;
+}
+
+/* 布局部分 */
+#Container{
+    width:1280px;
+    margin:0 auto;/*设置整个容器在浏览器中水平居中*/
+}
+#Head{
+		border:1px solid black;
+}
+#logo{
+    padding-left:50px;
+    padding-top:20px;
+    padding-bottom:50px;
+}
+#Content{
+    /*此处对容器设置了高度，一般不建议对容器设置高度，一般使用overflow:auto;属性设置容器根据内容自适应高度，如果不指定高度或不设置自适应高度，容器将默认为1个字符高度，容器下方的布局元素（footer）设置margin-top:属性将无效*/
+    margin-top:10px;/*此处讲解margin的用法，设置content与上面header元素之间的距离*/
+		background:#0FF;
+}
+#Content-Main{
+    height:400px;/* 此区域暂留 */
+    width:800px;
+    margin:20px;/*设置元素跟其他元素的距离为20像素*/
+    float:left;/*设置浮动，实现多列效果，div+Css布局中很重要的*/
+    background:#CFF;
+}
+#Content-Right{
+    width:400px;
+    margin:20px;/*设置元素跟其他元素的距离为20像素*/
+    float:left;/*设置浮动，实现多列效果，div+Css布局中很重要的*/
+}
+/*注：Content-Left和Content-Main元素是Content元素的子元素，两个元素使用了float:left;设置成两列，这个两个元素的宽度和这个两个元素设置的padding、margin的和一定不能大于父层Content元素的宽度，否则设置列将失败*/
+#Footer{
+		border:1px solid black;
+    margin-top:20px;
+}
+.Clear{
+    clear:both;
+}
+
+/* 顶部 */
+#header{
+	width:1280px;
+	height:30px;
+	margin:0 auto;
+}
+#header .logo {
+	width:100px;
+	height:30px;
+	margin-left:190px;
+	float:left;
+}
+#header .logo img {
+	display:block;
+}
+#header .member {
+	width:70px;
+	height:30px;
+	line-height:30px;
+	margin-right:190px;
+	float:right;
+	background:url(../img/arrow.png) no-repeat 55px center;
+	cursor:pointer;
+	position:relative;
+}
+#header ul {
+	position:absolute;
+	top:30px;
+	left:-20px;
+	background:#FBF7E1;
+	width:100px;
+	height:0px;
+	border:1px solid #999;
+	border-top:none;
+	padding:10px 0 0 0;
+	display:none;
+	opacity:0;
+	filter:alpha(opacity=0);
+	overflow:hidden;
+}
+#header ul li {
+	height:25px;
+	line-height:25px;
+	text-indent:20px;
+	letter-spacing:1px;
+}
+#header ul li a {
+	display:block;
+	text-decoration:none;
+	color:#333;
+	background:url(../img/arrow3.gif) no-repeat 5px 45%;
+}
+#header ul li a:hover {
+	background:#fc0 url(../img/arrow4.gif) no-repeat 5px 45%;
+}
+#header .login {
+	float:right;
+	width:35px;
+	height:30px;
+	line-height:30px;
+	cursor:pointer;
+}
+#header .reg {
+	float:right;
+	width:35px;
+	height:30px;
+	line-height:30px;
+	cursor:pointer;
+}
+
+#login {
+	width:400px;
+	height:250px;
+	border:1px solid #ccc;
+	/* position:absolute; */
+	display:none;
+	z-index:9999;
+	background:#fff;
+  float:right;
+	margin-bottom:20px;
+}
+#login h2 {
+	height:40px;
+	line-height:40px;
+	text-align:center;
+	font-size:14px;
+	letter-spacing:1px;
+	color:#666;
+	background:url(../img/login_header.png) repeat-x;
+	margin:0;
+	padding:0;
+	border-bottom:1px solid #ccc;
+	margin:0 0 20px 0;
+	cursor:move;
+}
+#login h2 img {
+	float:right;
+	position:relative;
+	top:14px;
+	right:8px;
+	cursor:pointer;
+}
+#login div.user, #login div.pass {
+	font-size:14px;
+	color:#666;
+	padding:5px 0;
+	text-align:center;
+}
+#login input.text {
+	width:200px;
+	height:25px;
+	border:1px solid #ccc;
+	background:#fff;
+	font-size:14px;
+}
+#login .button {
+	text-align:center;
+	padding:20px 0;
+}
+#login input.submit {
+	width:107px;
+	height:30px;
+	background:url(../img/login_button.png) no-repeat;
+	border:none;
+	cursor:pointer;
+}
+#login .other {
+	text-align:right;
+	padding:15px 10px;
+	color:#666;
+}
+
+#reg {
+	width:400px;
+	border:1px solid #ccc;
+	/* position:absolute; */
+	/* display:none; */
+  float:right;
+	z-index:9999;
+	background:#fff;
+	margin-bottom:20px;
+}
+#reg h2 {
+	height:40px;
+	line-height:40px;
+	text-align:center;
+	font-size:14px;
+	letter-spacing:1px;
+	color:#666;
+	background:url(../img/login_header.png) repeat-x;
+	margin:0;
+	padding:0;
+	border-bottom:1px solid #ccc;
+	margin:0 0 20px 0;
+	cursor:move;
+}
+#reg h2 img {
+	float:right;
+	position:relative;
+	top:14px;
+	right:8px;
+	cursor:pointer;
+}
+#reg dl {
+	font-size:14px;
+	color:#666;
+	margin:0 20px;
+	padding:0 0 0 10px;
+	position:relative;
+}
+#reg dl dd {
+	height:30px;
+	padding:5px 0;
+}
+#reg dl dd input.text {
+	width:200px;
+	height:25px;
+	border:1px solid #ccc;
+	background:#fff;
+	font-size:14px;
+	color:#666;
+}
+#reg dl dd input.submit {
+	width:143px;
+	height:33px;
+	background:url(../img/reg.png) no-repeat;
+	border:none;
+	cursor:pointer;
+}
+#reg #reminder{
+  display:none;
+	text-align: center;
+	padding-bottom: 0;
+	color:#666;
+}
+#reg .other {
+	text-align:right;
+	padding-top:15px;
+	padding-right:10px;
+	color:#666;
+}
