@@ -38,10 +38,25 @@
 
             </div>
             <div id="Content-Right">
+
+                {% if userInfo._id %}
+                <div id="userInfo">
+                    <h2><img alt="" class="close" />用户信息</h2>
+                    <div class="user">{{ userInfo.username }}</div>
+                    {% if userInfo.isAdmin %}
+                    <div class="reminder">Hello Admin !</div>
+                    <div class="reminder"><a href="/admin">进入管理</a></div>
+                    {% else %}
+                    <div class="reminder">欢迎光临我的博客！</div>
+                    {% endif %}
+                    <div id="logout" >退出</div>
+                </div>
+                {% else %}
               <div id="login">
                 <h2><img src="../public/img/close.png" alt="" class="close" />网站登录</h2>
                 <div class="user">账号：<input type="text" name="user" class="text" /></div>
                 <div class="pass">密码：<input type="password" name="pass" class="text" /></div>
+                <div class="reminder"></div>
                 <div class="button"><input type="button" class="submit" value="" /></div>
                 <div class="other">新用户注册| 忘记密码</div>
               </div>
@@ -55,10 +70,11 @@
                     <dd>密码确认：  <input type="password" name="repass" class="text" /></dd>
                     <dd id="reminder"><span>提示信息</span></dd>
                     <dd style="padding:10px 0 0 80px;"><input type="button" class="submit" /></dd>
-                    <dd class="other">已有账号？登录</dd>
+                    <dd class="other"><span>已有账号？登录</span></dd>
                   </dl>
                 </form>
               </div>
+                {% endif %}
 
             </div>
         </div>

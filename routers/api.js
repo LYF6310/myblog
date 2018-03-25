@@ -66,6 +66,35 @@ router.post('/user/register',function(req,res,next){
     })
 });
 
+router.post('/user/login',function(req,res,next){
+    var username = req.body.username;
+    var password = req.body.password;
+    User.findOne({
+        username:username,
+        password:password,
+    }).then(function (result) {
+        if(!result) {
+            responseData.code = 2;
+            responseData.message = '用户名或密码错误';
+            res.json(responseData);
+            return;
+        }
+        responseData.message = '登录成功';
+        responseData.userInfo = {
+            _id:result._id,
+            username:result.username,
+        }
+        req.cookies.set('userInfo',JSON.stringify({
+            _id:result._id,
+            username:result.username,
+        }));
+        res.json(responseData);
+    });
+});
 
+router.get('/user/logout',function(req,res){
+    req.cookies.set('userInfo',null);
+    res.json(responseData);
+})
 
 module.exports = router;

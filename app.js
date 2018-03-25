@@ -12,6 +12,7 @@ var cookies = require('cookies');
 //app => NodeJS  Http.createServer()
 var app = express();
 
+var User = require('./models/User');
 
 
 //设置静态文件托管
@@ -29,8 +30,28 @@ app.set('view engine','html')
 //在开发过程中，需要取消模版缓存,方便开发过程中的调试
 swig.setDefaults({cache:false});
 
-//
+//bodeparser设置
 app.use(bodyParser.urlencoded({extended:true}));
+//设置cookies
+app.use(function (req,res,next) {
+    req.cookies = new cookies(req,res);
+    //解析登录用户的cookie信息
+    req.userInfo = {};
+    if(req.cookies.get('userInfo')){
+        try{
+            req.userInfo = JSON.parse(req.cookies.get('userInfo'));
+
+            User.findById(req.userInfo._id).then(function (result) {
+                req.userInfo.isAdmin = Boolean(result.isAdmin);
+                // console.log(req.userInfo);
+                next();
+                }
+            )
+        }catch (e){
+            next();
+        }
+    }else next();
+});
 
 app.get('/public/css/index.css',function(req,res,next){
     res.setRequestHeader('conten-type','text/css');
