@@ -1,8 +1,9 @@
-{% extends 'layout.html'%}
+{% extends 'layout.html' %}
 {% block main %}
 <ol class="breadcrumb">
     <li><a href="/admin">管理首页</a></li>
-    <li class="active">用户首页</li>
+    <li><a href="/admin/category">分类管理</a></li>
+    <li class="active">分类列表 </li>
 </ol>
 
 <div class="panel panel-default">
@@ -12,17 +13,16 @@
     <table class="table table-hover table-striped">
         <tr>
             <th>ID</th>
-            <th>用户名</th>
-            <th>密码</th>
-            <th>是否是管理员</th>
+            <th>分类名称</th>
+            <th>操作</th>
         </tr>
-        {% for user in users %}
+        {% for category in categories %}
         <tr>
-            <td>{{parseInt(user._id.toString(),16)}}</td>
-            <td>{{user.username}}</td>
-            <td>{{user.password}}</td>
-            <td>{% if user.isAdmin %}是
-                {% endif %}
+            <td>{{parseInt(category._id.toString(),16)}}</td>
+            <td>{{category.name}}</td>
+            <td>
+                <a href="/admin/category/edit?id={{category._id.toString()}}">修改</a> |
+                <a href="/admin/category/delete?id={{category._id.toString()}}">删除</a>
             </td>
         </tr>
         {% endfor %}
@@ -33,18 +33,17 @@
             {% if page==1 %}
             <li class="previous disabled"><a><span aria-hidden="true">&larr;</span> 上一页</a></li>
             {% else %}
-            <li class="previous "><a href="/admin/user?page={{page-1}}"><span aria-hidden="true">&larr;</span> 上一页</a></li>
+            <li class="previous "><a href="/admin/category?page={{page-1}}"><span aria-hidden="true">&larr;</span> 上一页</a></li>
             {% endif %}
             {% if page>=pages %}
             <li class="next disabled"><a>下一页 <span aria-hidden="true">&rarr;</span></a></li>
             {% else %}
-            <li class="next"><a href="/admin/user?page={{page+1}}">下一页 <span aria-hidden="true">&rarr;</span></a></li>
+            <li class="next"><a href="/admin/category?page={{page+1}}">下一页 <span aria-hidden="true">&rarr;</span></a></li>
             {% endif %}
             <li>一共{{pages}}页,当前第{{page}}页</li>
         </ul>
     </nav>
 
 </div>
-
 
 {% endblock %}

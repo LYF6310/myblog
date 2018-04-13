@@ -1,0 +1,21 @@
+{% extends 'layout.html'%}
+{% block main %}
+
+<ol class="breadcrumb">
+    <li><a href="/admin">管理首页</a></li>
+    <li><a href="{{url}}">{{ lastIndex }}</a></li>
+    <li class="active">错误提示</li>
+</ol>
+
+<div class="panel panel-warning">
+    <div class="panel-heading">
+        错误提示
+    </div>
+    <div class="panel-body">{{ msg }}</div>
+    <div class="panel-footer">
+        <a href="javascript:window.history.back();">返回</a>
+    </div>
+</div>
+
+
+{% endblock %}

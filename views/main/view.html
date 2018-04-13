@@ -1,0 +1,50 @@
+{% extends 'layout.html' %}
+{% block main %}
+    <div class="jumbotron">
+        <h2>{{content.title}}</h2>
+        <h3>
+            <small style="float: right">-阅读量：{{content.views}}</small>
+            <small style="float: right">-时间：{{content.addTime|date('Y年m月d日 H:i:s',-8*60)}} &nbsp;</small>
+            <small style="float: right">作者：{{content.user.username}} &nbsp;</small>
+        </h3>
+        <div>
+            {{content.content}}
+        </div>
+        <div class="well" style="padding:5px;margin-bottom: 0px;width: 55px"><a style="color: black;font-size: 20px" href="/?category={{category}}"> 返回 </a></div>
+    </div>
+    <div class="jumbotron">
+        <div class="number">
+            <span style="font-weight: bold;font-size: 18px">评论 &nbsp;</span>
+            <span style="float: right">一共有<i id="commentsNum">{{content.comments.length}}</i>条评论</span>
+        </div>
+        {% if userInfo._id %}
+            <!--<h3><small>展示评论{{userInfo}}</small></h3>-->
+        <div class="input-group">
+            <input type="hidden" id="connentId" value="{{content._id.toString()}}">
+            <input type="text" class="form-control" placeholder="这里输入评论" id="msgComment">
+            <span class="input-group-btn">
+                <button class="btn btn-default" type="button" id="postComment">评论</button>
+            </span>
+        </div>
+        {% else %}
+            <h3><small>请登录</small></h3>
+        {% endif %}
+        <ul id="commentList" class="list-group" style="margin-left: 20px;margin-right: 20px;margin-bottom: 0px">
+            <!--{% for comment in content.comments%}-->
+                <!--<li class="list-group-item">-->
+                    <!--<span >{{comment.content}}</span>-->
+                    <!--<span style="float:right;">&nbsp; - &nbsp;{{comment.postTime|date('Y年m月d日 H:i:s',-8*60)}}</span>-->
+                    <!--<span class="badge" style="float:right;">{{comment.username}}</span>-->
+                <!--</li>-->
+            <!--{% endfor %}-->
+        </ul>
+        <nav aria-label="..." style="margin: 20px">
+            <ul class="pager" id="pager">
+                <li class="previous"><a><span aria-hidden="true">&larr;</span> 上一页</a></li>
+                <li class="next"><a>下一页 <span aria-hidden="true">&rarr;</span></a></li>
+                <p style="float: right;margin-bottom: 0;margin-right: 240px" ></p>
+            </ul>
+        </nav>
+    </div>
+    <script src="/public/js/comment.js"></script>
+{% endblock %}

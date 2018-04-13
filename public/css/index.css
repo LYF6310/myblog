@@ -16,7 +16,7 @@ ul li {
 
 /* 布局部分 */
 #Container{
-    width:1280px;
+    width:1240px;
     margin:0 auto;/*设置整个容器在浏览器中水平居中*/
 }
 #Head{
@@ -32,22 +32,43 @@ ul li {
     margin-top:10px;/*此处讲解margin的用法，设置content与上面header元素之间的距离*/
 		background:#0FF;
 }
-#Content-Main{
-    height:400px;/* 此区域暂留 */
-    width:800px;
-    margin:20px;/*设置元素跟其他元素的距离为20像素*/
-    float:left;/*设置浮动，实现多列效果，div+Css布局中很重要的*/
-    background:#CFF;
+#Content-Main {
+	width: 800px;
+	margin: 10px; /*设置元素跟其他元素的距离为20像素*/
+	float: left; /*设置浮动，实现多列效果，div+Css布局中很重要的*/
 }
+#Content-Main div{
+	 padding:15px;
+}
+#Content-Main div h3 a:link {
+	color: #000000;
+	text-decoration: none;
+}
+#Content-Main div h3 a:visited {
+	color: #000000;
+	text-decoration: none;
+}
+#Content-Main div h3 a:hover {
+	text-decoration: underline;
+}
+
+#Content-Main .jumbotron .colDefualt{
+	font-size: 14px;
+}
+#Content-Main .jumbotron .content{
+	font-size: 18px;
+}
+
 #Content-Right{
     width:400px;
-    margin:20px;/*设置元素跟其他元素的距离为20像素*/
+    margin:10px;/*设置元素跟其他元素的距离为20像素*/
     float:left;/*设置浮动，实现多列效果，div+Css布局中很重要的*/
 }
 /*注：Content-Left和Content-Main元素是Content元素的子元素，两个元素使用了float:left;设置成两列，这个两个元素的宽度和这个两个元素设置的padding、margin的和一定不能大于父层Content元素的宽度，否则设置列将失败*/
 #Footer{
-		border:1px solid black;
     margin-top:20px;
+	margin-bottom: 20px;
+	text-align:center;
 }
 .Clear{
     clear:both;

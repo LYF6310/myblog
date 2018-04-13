@@ -2,6 +2,8 @@
 var express = require('express');
 var router = express.Router();
 var User = require('../models/User');
+var Content = require('../models/Content');
+
 
 var responseData = {
   code:0,
@@ -11,7 +13,7 @@ router.use(function(req,res,next){
   responseData = {
     code:0,
     message:'',
-  }
+  };
   next();
 });
 
@@ -83,7 +85,7 @@ router.post('/user/login',function(req,res,next){
         responseData.userInfo = {
             _id:result._id,
             username:result.username,
-        }
+        };
         req.cookies.set('userInfo',JSON.stringify({
             _id:result._id,
             username:result.username,
@@ -95,6 +97,38 @@ router.post('/user/login',function(req,res,next){
 router.get('/user/logout',function(req,res){
     req.cookies.set('userInfo',null);
     res.json(responseData);
-})
+});
+
+//评论提交
+router.post('/comment/post',function (req,res,next) {
+    //文章的ID
+    var contentId = req.body.contentid ||'';
+    var postData = {
+        username:req.userInfo.username,
+        postTime:new Date(),
+        content:req.body.content,
+    };
+    //查询这篇文章的信息
+    Content.findOne({
+        _id:contentId
+    }).then(function (content) {
+        content.comments.push(postData);
+        return content.save();
+    }).then(function (newComment) {
+        responseData.data = newComment;
+        responseData.msg = '评论成功';
+        res.json(responseData);
+    })
+});
+
+router.post('/comments',function (req,res,next) {
+    var contentId = req.body.contentid ||'';
+    Content.findOne({
+        _id:contentId,
+    }).then(function (rs) {
+        responseData.comments = rs.comments;
+        res.json(responseData);
+    })
+});
 
 module.exports = router;

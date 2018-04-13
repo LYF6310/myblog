@@ -1,89 +1,31 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <title>myBlog</title>
-    <script src='../public/js/jquery.js'></script>
-    <script src='../public/js/index.js'></script>
+{% extends 'layout.html' %}
+{% block main %}
+{% for content in contents %}
+    <div class="jumbotron">
+        <h3><a href="view?contentid={{content.id}}&&category={{category}}">{{content.title}}</a></h3>
+        <p class="colDefualt">
+            作者：<span class="colInfo">{{content.user.username}}</span>
+            - 时间：<span class="colInfo">{{content.addTime|date('Y年m月d日 H:i:s',-8*60)}}</span>
+            <span style="float: right">&nbsp; - 阅读：<span class="colInfo" >{{content.views}}</span></span>
+            <span style="float: right">&nbsp; - 评论：<span class="colInfo" >{{content.comments.length||0}}</span></span>
+        </p>
+        <p class="content">{{content.description}}</p>
 
-    <link rel="stylesheet" type="text/css" href="../public/css/index.css" />
-
-  </head>
-  <body>
-
-    <div id="header">
-    	<div class="logo"><img src="../public/img/logo.gif" alt="" /></div>
-    	<div class="member">个人中心
-    		<ul class="member_ul">
-    			<li><a href="###">设置</a></li>
-    			<li><a href="###">换肤</a></li>
-    			<li><a href="###">帮助</a></li>
-    			<li><a href="###">退出</a></li>
-    		</ul>
-    	</div>
-      <div class="reg">注册</div>
-    	<div class="login">登录</div>
     </div>
-
-    <div class="Clear"><!--如何你上面用到float,下面布局开始前最好清除一下。--></div>
-
-
-    <div id="Container">
-        <div id="Head">
-          head
-          <!-- <div id="logo">这里设置了padding属性介绍一下padding的用法,padding将设置文本与边框的距离。</div> -->
-        </div>
-        <div id="Content">
-            <div id="Content-Main">
-
-            </div>
-            <div id="Content-Right">
-
-                {% if userInfo._id %}
-                <div id="userInfo">
-                    <h2><img alt="" class="close" />用户信息</h2>
-                    <div class="user">{{ userInfo.username }}</div>
-                    {% if userInfo.isAdmin %}
-                    <div class="reminder">Hello Admin !</div>
-                    <div class="reminder"><a href="/admin">进入管理</a></div>
-                    {% else %}
-                    <div class="reminder">欢迎光临我的博客！</div>
-                    {% endif %}
-                    <div id="logout" >退出</div>
-                </div>
-                {% else %}
-              <div id="login">
-                <h2><img src="../public/img/close.png" alt="" class="close" />网站登录</h2>
-                <div class="user">账号：<input type="text" name="user" class="text" /></div>
-                <div class="pass">密码：<input type="password" name="pass" class="text" /></div>
-                <div class="reminder"></div>
-                <div class="button"><input type="button" class="submit" value="" /></div>
-                <div class="other">新用户注册| 忘记密码</div>
-              </div>
-
-              <div id="reg">
-                <h2><img src="../public/img/close.png" alt="" class="close" />会员注册</h2>
-                <form name="reg">
-                  <dl>
-                    <dd>用 户 名： <input type="text" name="user" class="text" /></dd>
-                    <dd>密　　码：  <input type="password" name="pass" class="text" /></dd>
-                    <dd>密码确认：  <input type="password" name="repass" class="text" /></dd>
-                    <dd id="reminder"><span>提示信息</span></dd>
-                    <dd style="padding:10px 0 0 80px;"><input type="button" class="submit" /></dd>
-                    <dd class="other"><span>已有账号？登录</span></dd>
-                  </dl>
-                </form>
-              </div>
-                {% endif %}
-
-            </div>
-        </div>
-        <div class="Clear"><!--如何你上面用到float,下面布局开始前最好清除一下。--></div>
-        <div id="Footer">Footer</div>
-    </div>
-
-
-
-
-  </body>
-</html>
+    {% endfor %}
+    <nav aria-label="...">
+        <ul class="pager">
+            {% if page==1 %}
+            <li class="previous disabled"><a ><span aria-hidden="true">&larr;</span> 上一页</a></li>
+            {% else %}
+            <li class="previous "><a href='/?category={{category}}&page={{page-1}}'><span aria-hidden="true">&larr;</span> 上一页</a></li>
+            {% endif %}
+            {% if page>=pages %}
+            <li class="next disabled"><a href='/?category={{category}}&page={{page+1}}'>下一页 <span aria-hidden="true">&rarr;</span></a></li>
+            {% else %}
+            <li class="next"><a href='/?category={{category}}&page={{page+1}}'>下一页 <span aria-hidden="true">&rarr;</span></a></li>
+            {% endif %}
+            <li>一共{{pages}}页,当前第{{page}}页</li>
+        </ul>
+    </nav>
+{% endblock %}
